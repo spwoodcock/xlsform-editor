@@ -16,6 +16,7 @@ export class SpreadsheetOverview {
     this.render();
     this.initialiseElements();
     this.attachEventListeners();
+    this.checkForUrlParam();
   }
 
   private initialiseElements(): void {
@@ -66,7 +67,18 @@ export class SpreadsheetOverview {
   }
 
   private isWorkbookEmpty(): boolean {
-    return this.spreadsheet?.textContent?.trim() === 'WjSheet1Sheet1';
+    const content = this.spreadsheet?.textContent?.trim();
+    return content === 'WjWjSheet1' || content === 'WjSheet1Sheet1';
+  }
+
+  private checkForUrlParam(): void {
+    const urlParams = new URLSearchParams(window.location.search);
+    const url = urlParams.get('url');
+
+    if (url) {
+      this.urlInput.value = url;
+      this.openFileFromUrl();
+    }
   }
 
   public openFile(e: Event): void {
