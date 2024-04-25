@@ -39,7 +39,7 @@ class SpreadsheetOverview extends React.Component<any, any> {
             ExcelUtility.load(selectorFiles[0]).then((w) => {
                 this.spreadsheet.workbook = w;
             }, (e) => {
-                console.error("Workbook Load Error");
+                console.error("Workbook Load Error", e);
             });
         }
     }

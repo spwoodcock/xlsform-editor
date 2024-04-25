@@ -49,7 +49,7 @@ export class ExcelUtility {
             const req = new XMLHttpRequest();
             req.open("GET", url, true);
             req.responseType = "arraybuffer";
-            req.onload = (d): void => {
+            req.onload = (): void => {
                 const data = new Uint8Array(req.response);
                 Workbook.load(data, new WorkbookLoadOptions(), (w) => {
                     resolve(w);
@@ -82,9 +82,10 @@ export class ExcelUtility {
             const fr = new FileReader();
             fr.onerror = (e): void => {
                 reject(fr.error);
+                console.log(e);
             };
 
-            fr.onload = (e): void => {
+            fr.onload = (): void => {
                 resolve(new Uint8Array(fr.result as ArrayBuffer));
             };
             fr.readAsArrayBuffer(file);
